@@ -1,7 +1,7 @@
-%_javapackages_macros
+%{?_javapackages_macros:%_javapackages_macros}
 Name:          jackson-annotations
 Version:       2.2.2
-Release:       3.0%{?dist}
+Release:       3.1%{?dist}
 Summary:       Core annotations for Jackson data processor 
 License:       ASL 2.0
 URL:           http://wiki.fasterxml.com/JacksonHome
