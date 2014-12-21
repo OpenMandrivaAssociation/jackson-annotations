@@ -1,17 +1,13 @@
 %{?_javapackages_macros:%_javapackages_macros}
 Name:          jackson-annotations
-Version:       2.2.2
-Release:       3.1%{?dist}
+Version:       2.4.2
+Release:       1.1
+Group:		Development/Java
 Summary:       Core annotations for Jackson data processor 
 License:       ASL 2.0
 URL:           http://wiki.fasterxml.com/JacksonHome
 Source0:       https://github.com/FasterXML/jackson-annotations/archive/%{name}-%{version}.tar.gz
-# jackson-annotations package don't include the license file
-# https://github.com/FasterXML/jackson-annotations/issues/14
-Source1:       http://www.apache.org/licenses/LICENSE-2.0.txt
-
-BuildRequires: mvn(com.fasterxml:oss-parent) >= 10
-BuildRequires: java-devel
+BuildRequires: mvn(com.fasterxml.jackson:jackson-parent:pom:)
 
 BuildRequires: maven-local
 BuildRequires: maven-enforcer-plugin
@@ -37,8 +33,8 @@ This package contains javadoc for %{name}.
 %prep
 %setup -q -n %{name}-%{name}-%{version}
 
-cp -p %{SOURCE1} .
-sed -i 's/\r//' LICENSE-2.0.txt
+cp -p src/main/resources/META-INF/LICENSE .
+sed -i 's/\r//' LICENSE
 
 %build
 
@@ -49,12 +45,24 @@ sed -i 's/\r//' LICENSE-2.0.txt
 %mvn_install
 
 %files -f .mfiles
-%doc LICENSE-2.0.txt README.md release-notes/*
+%doc LICENSE README.md release-notes/*
 
 %files javadoc -f .mfiles-javadoc
-%doc LICENSE-2.0.txt
+%doc LICENSE
 
 %changelog
+* Sat Sep 20 2014 gil cattaneo <puntogil@libero.it> 2.4.2-1
+- update to 2.4.2
+
+* Wed Jul 02 2014 gil cattaneo <puntogil@libero.it> 2.4.1-1
+- update to 2.4.1
+
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.2.2-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
+* Fri Mar 28 2014 Michael Simacek <msimacek@redhat.com> - 2.2.2-4
+- Use Requires: java-headless rebuild (#1067528)
+
 * Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.2.2-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
@@ -74,3 +82,4 @@ sed -i 's/\r//' LICENSE-2.0.txt
 
 * Thu Sep 13 2012 gil cattaneo <puntogil@libero.it> 2.0.6-1
 - initial rpm
+
