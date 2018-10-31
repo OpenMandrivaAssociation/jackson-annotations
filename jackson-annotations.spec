@@ -1,7 +1,7 @@
 %{?_javapackages_macros:%_javapackages_macros}
 Name:          jackson-annotations
 Version:       2.4.2
-Release:       1.2
+Release:       1.3
 Group:		Development/Java
 Summary:       Core annotations for Jackson data processor 
 License:       ASL 2.0
