@@ -10,6 +10,8 @@ Source0:	https://github.com/FasterXML/jackson-annotations/archive/refs/tags/jack
 BuildArch:	noarch
 BuildRequires:	mvn(com.fasterxml:oss-parent:pom::)
 BuildRequires:	mvn(com.fasterxml.jackson:jackson-parent:pom::)
+# oss-parent pins the compiler plugin to this ASM jar.
+BuildRequires:	mvn(org.ow2.asm:asm)
 # Literal, so the first rpmbuild -bs records them before sysjar is installed.
 BuildRequires:	maven
 BuildRequires:	java-current-devel
