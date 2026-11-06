@@ -1,85 +1,34 @@
-%{?_javapackages_macros:%_javapackages_macros}
-Name:          jackson-annotations
-Version:       2.4.2
-Release:       1.3
+Name:		jackson-annotations
+Version:	2.21
+Release:	1
+Summary:	Core annotations for the Jackson data processor
 Group:		Development/Java
-Summary:       Core annotations for Jackson data processor 
-License:       ASL 2.0
-URL:           https://wiki.fasterxml.com/JacksonHome
-Source0:       https://github.com/FasterXML/jackson-annotations/archive/%{name}-%{version}.tar.gz
-BuildRequires: mvn(com.fasterxml.jackson:jackson-parent:pom:)
+License:	ASL 2.0
+URL:		https://github.com/FasterXML/jackson-annotations
+Source0:	https://github.com/FasterXML/jackson-annotations/archive/refs/tags/jackson-annotations-%{version}.tar.gz#/jackson-annotations-%{version}.tar.gz
 
-BuildRequires: maven-local
-BuildRequires: maven-enforcer-plugin
-BuildRequires: maven-plugin-build-helper
-BuildRequires: maven-plugin-bundle
-BuildRequires: maven-site-plugin
+BuildArch:	noarch
+BuildRequires:	mvn(com.fasterxml:oss-parent:pom::)
+BuildRequires:	mvn(com.fasterxml.jackson:jackson-parent:pom::)
+# Literal, so the first rpmbuild -bs records them before sysjar is installed.
+BuildRequires:	maven
+BuildRequires:	java-current-devel
+BuildSystem:	maven
 
-Provides:      jackson2-annotations = %{version}-%{release}
-Obsoletes:     jackson2-annotations < %{version}-%{release}
-
-BuildArch:     noarch
+Provides:	jackson2-annotations = %{version}-%{release}
+Obsoletes:	jackson2-annotations < %{version}-%{release}
 
 %description
-Core annotations used for value types,
-used by Jackson data-binding package.
-
-%package javadoc
-Summary:       Javadoc for %{name}
-
-%description javadoc
-This package contains javadoc for %{name}.
+Core annotations used by Jackson data binding.
+2.21 matches jackson-parent 2.21 and targets Java 8.
+It adds JsonInclude.Value constants, @JsonDeserializeAs,
+@JsonSerializeAs, a radix property on @JsonFormat, and
+JsonTypeInfo.As.NOTHING.
+The bundle plugin is not packaged, so the jar has no OSGi manifest.
+Tests are skipped.
 
 %prep
-%setup -q -n %{name}-%{name}-%{version}
-
-cp -p src/main/resources/META-INF/LICENSE .
-sed -i 's/\r//' LICENSE
-
-%build
-
-%mvn_file : %{name}
-%mvn_build
-
-%install
-%mvn_install
+%setup -q -n jackson-annotations-jackson-annotations-%{version}
 
 %files -f .mfiles
-%doc LICENSE README.md release-notes/*
-
-%files javadoc -f .mfiles-javadoc
-%doc LICENSE
-
-%changelog
-* Sat Sep 20 2014 gil cattaneo <puntogil@libero.it> 2.4.2-1
-- update to 2.4.2
-
-* Wed Jul 02 2014 gil cattaneo <puntogil@libero.it> 2.4.1-1
-- update to 2.4.1
-
-* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.2.2-5
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
-
-* Fri Mar 28 2014 Michael Simacek <msimacek@redhat.com> - 2.2.2-4
-- Use Requires: java-headless rebuild (#1067528)
-
-* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.2.2-3
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
-
-* Mon Jul 22 2013 gil cattaneo <puntogil@libero.it> 2.2.2-2
-- review fixes
-
-* Tue Jul 16 2013 gil cattaneo <puntogil@libero.it> 2.2.2-1
-- 2.2.2
-- renamed jackson-annotations
-
-* Tue May 07 2013 gil cattaneo <puntogil@libero.it> 2.2.1-1
-- 2.2.1
-
-* Wed Oct 24 2012 gil cattaneo <puntogil@libero.it> 2.1.0-1
-- update to 2.1.0
-- renamed jackson2-annotations
-
-* Thu Sep 13 2012 gil cattaneo <puntogil@libero.it> 2.0.6-1
-- initial rpm
-
+%doc LICENSE README.md SECURITY.md release-notes/VERSION-2.x
