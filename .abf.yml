@@ -1,4 +1,5 @@
 removed_sources:
   jackson-annotations-2.2.2.tar.gz: 43e9f9fadb2f77b04a784ce31213d48dcb353996
-sources:
   jackson-annotations-2.21.tar.gz: dfbb73c14472c8c7528b2038c5945303a98c8e8f
+sources:
+  jackson-annotations-2.23.tar.gz: aedc3dee9ad52f93187b5f480dba5667c9c8549d

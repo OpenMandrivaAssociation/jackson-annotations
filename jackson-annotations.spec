@@ -1,6 +1,6 @@
 Name:		jackson-annotations
-Version:	2.21
-Release:	2
+Version:	2.23
+Release:	1
 Summary:	Core annotations for the Jackson data processor
 Group:		Development/Java
 License:	ASL 2.0
@@ -10,6 +10,8 @@ Source0:	https://github.com/FasterXML/jackson-annotations/archive/refs/tags/jack
 BuildArch:	noarch
 BuildRequires:	mvn(com.fasterxml:oss-parent:pom::)
 BuildRequires:	mvn(com.fasterxml.jackson:jackson-parent:pom::)
+BuildRequires:	fasterxml-oss-parent >= 81
+BuildRequires:	jackson-parent >= 2.23
 # oss-parent pins the compiler plugin to this ASM jar.
 BuildRequires:	mvn(org.ow2.asm:asm)
 # Literal, so the first rpmbuild -bs records them before sysjar is installed.
@@ -22,10 +24,11 @@ Obsoletes:	jackson2-annotations < %{version}-%{release}
 
 %description
 Core annotations used by Jackson data binding.
-2.21 matches jackson-parent 2.21 and targets Java 8.
-It adds JsonInclude.Value constants, @JsonDeserializeAs,
-@JsonSerializeAs, a radix property on @JsonFormat, and
-JsonTypeInfo.As.NOTHING.
+2.23 matches jackson-parent 2.23 and targets Java 8.
+Since 2.21 it adds @JsonApplyView, an OptBoolean order property
+on @JsonIncludeProperties, JsonTypeInfo.writeTypeIdForDefaultImpl,
+and better Locale handling in JsonFormat.Value.
+2.23 itself has no annotation changes past 2.22.
 The bundle plugin is not packaged, so the jar has no OSGi manifest.
 The jar is multi-release: its Java 9 module is
 com.fasterxml.jackson.annotation. Tests are skipped.
